@@ -47,4 +47,4 @@ def run(
         state.switch_player()
 
 if __name__ == "__main__":
-    run(['r', 'b'])
+    run()
