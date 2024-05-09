@@ -61,7 +61,6 @@ class GameState:
 
         return count >= self._points_to_win
 
-
     def _check_for_win_vertically(self, row: int, column: int) -> bool:
         count = 0
         for r in range(row, min(row + self._points_to_win, self._board.rows)):
@@ -99,6 +98,3 @@ class GameState:
             c += column_increment
 
         return False
-
-    def _check_positive_slope(self) -> bool:
-        pass

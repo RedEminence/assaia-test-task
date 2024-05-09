@@ -16,9 +16,9 @@ def run(
     state = GameState(board=board, players=players, points_for_win=points_for_win)
 
     print('Starting the game, to quit type exit')
+    state.display_current_state()
 
     while True:
-        state.display_current_state()
         current_player = state.get_current_player()
         player_input = input(f"Turn for player {current_player}. Enter column index: ")
 
@@ -35,9 +35,11 @@ def run(
             state.make_turn(player_input)
         except GameException as ex:
             print(f"Could not update board: {ex}. Try again please")
+            continue
+
+        state.display_current_state()
 
         is_player_winner = state.check_for_winner()
-
         if is_player_winner:
             print(f"Player {current_player} wins!")
             return
@@ -45,4 +47,4 @@ def run(
         state.switch_player()
 
 if __name__ == "__main__":
-    run()
+    run(['r', 'b'])
