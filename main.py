@@ -37,10 +37,12 @@ def run(
             print(f"Could not update board: {ex}. Try again please")
 
         is_player_winner = state.check_for_winner()
-        print('look', is_player_winner)
+
         if is_player_winner:
             print(f"Player {current_player} wins!")
             return
+
+        state.switch_player()
 
 if __name__ == "__main__":
     run()

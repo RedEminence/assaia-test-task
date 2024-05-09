@@ -16,7 +16,7 @@ class GameState:
         if points_for_win < 1:
             raise Exception("points_for_win must be greater than zero")
 
-        self._points_for_win = points_for_win
+        self._points_to_win = points_for_win
 
         self._board = board
         self._players = players
@@ -30,6 +30,8 @@ class GameState:
 
     def make_turn(self, column: int):
         self._board.update_board(column, self.get_current_player())
+
+    def switch_player(self):
         if self._current_player_index < len(self._players) - 1:
             self._current_player_index += 1
         else:
@@ -50,23 +52,24 @@ class GameState:
 
     def _check_for_win_horizontally(self, row: int, column: int) -> bool:
         count = 0
-        for c in range(column, min(column + self._points_for_win, self._board.columns)):
+        for c in range(column, min(column + self._points_to_win, self._board.columns)):
             if self._board.get_grid()[row][c] == self.get_current_player():
                 count += 1
             else:
                 break
 
-        return count >= self._points_for_win
+        return count >= self._points_to_win
+
 
     def _check_for_win_vertically(self, row: int, column: int) -> bool:
         count = 0
-        for r in range(row, min(row + self._points_for_win, self._board.rows)):
+        for r in range(row, min(row + self._points_to_win, self._board.rows)):
             if self._board.get_grid()[r][column] == self.get_current_player():
                 count += 1
             else:
                 break
 
-        return count >= self._points_for_win
+        return count >= self._points_to_win
 
     def _check_for_win_diagonally(self) -> bool:
         pass
