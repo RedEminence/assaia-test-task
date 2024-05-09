@@ -44,7 +44,8 @@ class GameState:
                 if board[row][column] == self.get_current_player():
                     if any([
                         self._check_for_win_vertically(row, column),
-                        self._check_for_win_horizontally(row, column)
+                        self._check_for_win_horizontally(row, column),
+                        self._check_for_win_diagonally(row, column)
                     ]):
                         return True
 
@@ -71,5 +72,33 @@ class GameState:
 
         return count >= self._points_to_win
 
-    def _check_for_win_diagonally(self) -> bool:
+    def _check_for_win_diagonally(self, row: int, column: int) -> bool:
+        return (self._check_slope(row, column, 1, 1)
+                or self._check_slope(row, column, 1, -1))
+
+    def _check_slope(
+            self,
+            row: int,
+            column: int,
+            row_increment: int,
+            column_increment: int
+    ) -> bool:
+        count = 1
+
+        r, c = row + row_increment, column + column_increment
+
+        while 0 <= r < self._board.rows and 0 <= c < self._board.columns:
+            if self._board.get_grid()[r][c] == self.get_current_player():
+                count += 1
+                if count >= self._points_to_win:
+                    return True
+            else:
+                break
+
+            r += row_increment
+            c += column_increment
+
+        return False
+
+    def _check_positive_slope(self) -> bool:
         pass
