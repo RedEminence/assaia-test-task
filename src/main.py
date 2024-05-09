@@ -7,13 +7,13 @@ def run(
         players: list = None,
         rows: int = 6,
         columns: int = 7,
-        points_for_win: int = 4,
+        points_to_win: int = 4,
 ):
     if not players:
         players = [1, 2]
 
     board = GameBoard(rows=rows, columns=columns)
-    state = GameState(board=board, players=players, points_for_win=points_for_win)
+    state = GameState(board=board, players=players, points_to_win=points_to_win)
 
     print('Starting the game, to quit type exit')
     state.display_current_state()

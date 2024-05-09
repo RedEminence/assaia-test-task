@@ -8,15 +8,15 @@ class GameState:
             self,
             board: GameBoard,
             players: list[Union[int, str]],
-            points_for_win: int = 4,
+            points_to_win: int = 4,
     ):
         if not players or len(players) < 2:
             raise ValueError("Not a valid player list.")
 
-        if points_for_win < 1:
-            raise Exception("points_for_win must be greater than zero")
+        if points_to_win < 1:
+            raise Exception("points_to_win must be greater than zero")
 
-        self._points_to_win = points_for_win
+        self._points_to_win = points_to_win
 
         self._board = board
         self._players = players
